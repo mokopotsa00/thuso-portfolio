@@ -1,0 +1,58 @@
+export const SEGMENTS = [
+  { a: 0,   c: '#f0883e', label: 'builder',  desc: '5+ years shipping full-stack apps from first commit to production. Real ownership, end to end.' },
+  { a: 45,  c: '#ff7ab6', label: 'creative',  desc: 'Design, motion, code — I translate mockups into pixel-perfect, animated interfaces.' },
+  { a: 90,  c: '#3fb950', label: 'WebRTC',    desc: 'Real-time video, audio, screen sharing, web chat — shipped at enterprise scale at Tegsoft.' },
+  { a: 135, c: '#f5c518', label: 'curious',   desc: 'Always asking why. Breaking things apart just to understand how they work.' },
+  { a: 180, c: '#bc8cff', label: 'Vue·React', desc: '5+ years across Vue.js PWAs, React SPAs, Angular — whichever fits the project.' },
+  { a: 225, c: '#58c7ff', label: 'CI/CD',     desc: 'Automated cloud deployments to IBM Cloud. Pipeline design, zero-touch ship days.' },
+  { a: 270, c: '#ff6363', label: 'mobile',    desc: 'PWA → Android via TWA and Cordova. Offline-first. Optimised for low-connectivity rural use.' },
+  { a: 315, c: '#39d4c0', label: 'devops',    desc: 'Pipelines, automation, ship without fear. I make deployments boring — in the best way.' },
+]
+
+export const PROJECTS = [
+  {
+    title: 'Tegsoft Contact Centre',
+    year: '2024',
+    accent: '#f0883e',
+    tags: ['Vue.js', 'WebRTC', 'WebSocket', 'PWA', 'TWA', 'IBM Cloud'],
+    short: 'Enterprise PWA — real-time video calling, audio, chat, and screen sharing. Shipped 100% remote.',
+    full: 'Built from scratch. Implemented video/audio calling, web chat, screen sharing, and push notifications using WebRTC and WebSocket. Automated CI/CD deployments to IBM Cloud. Converted the PWA to native Android via Trusted Web Activities.',
+    demo: null,
+  },
+  {
+    title: 'Farmers Trainer App',
+    year: '2023',
+    accent: '#3fb950',
+    tags: ['Vue.js', 'Quasar', 'Cordova', 'Laravel'],
+    short: 'Offline-first Android app for rural South Africa. Works with zero internet. Background sync.',
+    full: 'Offline-first architecture with background sync ensuring uninterrupted usability in low-connectivity environments. Optimised API call patterns and data caching significantly cut load time and mobile data usage.',
+    demo: null,
+  },
+  {
+    title: 'Skinet E-Commerce',
+    year: '2022',
+    accent: '#bc8cff',
+    tags: ['Angular 9', 'C# .NET', 'Redis', 'SQLite', 'JWT'],
+    short: 'Full-stack e-commerce — RESTful API, lazy loading, HTTP interceptors, JWT auth, repository pattern.',
+    full: 'Architected a RESTful API with automated data seeding from spreadsheets into SQLite using repository and generic design patterns. Implemented lazy loading and HTTP interceptors in Angular for optimised performance.',
+    demo: 'https://github.com/mokopotsa00/skinet',
+  },
+  {
+    title: 'Animated Landing Page',
+    year: '2021',
+    accent: '#58c7ff',
+    tags: ['Pure CSS3', 'SCSS', 'HTML5', 'Zero JS'],
+    short: 'Fully animated, responsive landing page — zero JavaScript. Proof that CSS alone can do a lot.',
+    full: 'Built with zero JavaScript. Demonstrates mastery of advanced CSS3 and SCSS animation techniques — smooth, responsive, production-grade. Every transition hand-crafted.',
+    demo: 'https://mokopotsa00.github.io/landing-page',
+  },
+  {
+    title: 'Abangani Media Platform',
+    year: '2019',
+    accent: '#39d4c0',
+    tags: ['PHP Laravel', 'C# ASP.NET', 'Angular', 'jQuery'],
+    short: 'Multiple client-facing web apps, REST APIs, and SPAs. Full-stack across PHP and .NET.',
+    full: 'Developed and maintained RESTful APIs handling complex JSON for multiple client-facing applications. Built robust backends with PHP Laravel and C# ASP.NET. Delivered Angular SPAs with lazy loading and interceptors.',
+    demo: null,
+  },
+]
