@@ -202,7 +202,8 @@ defineExpose({ el })
     flex-direction: column;
     align-items: center;
     margin: 10px auto 0;
-    gap: 14px;
+    padding: 20px 0;
+    gap: 20px;
   }
 
   .cta {

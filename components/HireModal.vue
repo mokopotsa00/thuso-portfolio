@@ -33,7 +33,7 @@
           fill="currentColor"
           style="animation-delay:.4s" />
       </svg>
-      <span>Hire me</span>
+      <span>Let's build something</span>
     </button>
   </div>
 
@@ -104,12 +104,9 @@
               @change="errors.budget = false">
               <option value=""
                 disabled>pick a ballpark</option>
-              <option>Under $1k — small tweak / one-off</option>
-              <option>$1k – $5k — a weekend build</option>
-              <option>$5k – $15k — a focused sprint</option>
-              <option>$15k – $40k — a proper product slice</option>
-              <option>$40k+ — serious scope</option>
-              <option>Not sure yet — let's figure it out</option>
+              <option v-for="opt in budgetOptions"
+                :key="opt"
+                :value="opt">{{ opt }}</option>
             </select>
           </div>
           <div class="msg-field">
@@ -150,6 +147,31 @@
 const isOpen = ref(false)
 const form = reactive({ name: '', email: '', project: '', budget: '', timeline: '' })
 const errors = reactive({ name: false, email: false, project: false, budget: false })
+const isZAR = ref(false)
+
+onMounted(() => {
+  const zarTimezones = new Set(['Africa/Johannesburg', 'Africa/Windhoek'])
+  isZAR.value = zarTimezones.has(Intl.DateTimeFormat().resolvedOptions().timeZone)
+})
+
+const budgetOptions = computed(() => isZAR.value
+  ? [
+    "Under R20k — small tweak / one-off",
+    "R20k – R90k — a weekend build",
+    "R90k – R280k — a focused sprint",
+    "R280k – R750k — a proper product slice",
+    "R750k+ — serious scope",
+    "Not sure yet — let's figure it out",
+  ]
+  : [
+    "Under $1k — small tweak / one-off",
+    "$1k – $5k — a weekend build",
+    "$5k – $15k — a focused sprint",
+    "$15k – $40k — a proper product slice",
+    "$40k+ — serious scope",
+    "Not sure yet — let's figure it out",
+  ]
+)
 
 function open() {
   isOpen.value = true
@@ -380,7 +402,7 @@ onMounted(() => {
 .msg-textarea,
 .msg-select {
   font-family: 'Caveat', cursive;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   color: var(--chalk);
   background: rgba(255, 255, 255, .04);
   border: 1px dashed rgba(255, 255, 255, .18);
@@ -389,6 +411,10 @@ onMounted(() => {
   outline: none;
   transition: border-color .3s, background .3s, box-shadow .3s;
   width: 100%;
+}
+
+.msg-select {
+  font-size: .95rem;
 }
 
 .msg-input:focus,
@@ -422,6 +448,7 @@ onMounted(() => {
 }
 
 .msg-select option {
+  font-size: .95rem;
   background: #0d1117;
   color: var(--chalk);
 }
@@ -501,6 +528,7 @@ onMounted(() => {
     position: static;
     width: auto;
     margin: 6px auto 0;
+    padding: 20px 0 25px;
     align-items: center;
   }
 
