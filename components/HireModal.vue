@@ -528,7 +528,7 @@ onMounted(() => {
     position: static;
     width: auto;
     margin: 6px auto 0;
-    padding: 20px 0 25px;
+    padding: 15px 0 25px;
     align-items: center;
   }
 
