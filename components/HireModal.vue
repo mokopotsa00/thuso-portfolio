@@ -341,7 +341,7 @@ onMounted(() => {
 
 .msg-modal-sub {
   font-family: 'Caveat', cursive;
-  font-size: 1.05rem;
+  font-size: 1.25rem;
   color: var(--dim);
   margin: 2px 0 14px;
   line-height: 1.35;
@@ -380,7 +380,7 @@ onMounted(() => {
 .msg-textarea,
 .msg-select {
   font-family: 'Caveat', cursive;
-  font-size: 1.05rem;
+  font-size: 1.25rem;
   color: var(--chalk);
   background: rgba(255, 255, 255, .04);
   border: 1px dashed rgba(255, 255, 255, .18);
@@ -480,7 +480,7 @@ onMounted(() => {
 
 .msg-footnote {
   font-family: 'Caveat', cursive;
-  font-size: .9rem;
+  font-size: 1.25rem;
   color: var(--dim-2);
   margin-top: 10px;
   text-align: center;

@@ -180,7 +180,7 @@ onUnmounted(() => {
   justify-content: center;
   gap: 4px;
   font-family: 'Caveat', cursive;
-  font-size: clamp(1.05rem, 1.6vw, 1.45rem);
+  font-size: clamp(1.25rem, 1.6vw, 1.45rem);
   line-height: 1.35;
   color: var(--chalk);
   user-select: none;
