@@ -1,37 +1,12 @@
 <template>
   <!-- Trigger button -->
   <div class="left-ctas">
-    <button class="cta cta-message"
-      type="button"
-      @click="open">
-      <svg width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true">
-        <path d="M4 5 L20 5 Q22 5 22 7 L22 16 Q22 18 20 18 L14 18 L9 22 L9 18 L4 18 Q2 18 2 16 L2 7 Q2 5 4 5 Z"
-          fill="rgba(57,212,192,0.12)" />
-        <circle class="msg-dot"
-          cx="8"
-          cy="11.5"
-          r="1.3"
-          fill="currentColor" />
-        <circle class="msg-dot"
-          cx="12"
-          cy="11.5"
-          r="1.3"
-          fill="currentColor"
-          style="animation-delay:.2s" />
-        <circle class="msg-dot"
-          cx="16"
-          cy="11.5"
-          r="1.3"
-          fill="currentColor"
-          style="animation-delay:.4s" />
+    <button class="cta cta-message" type="button" @click="open">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 5 L20 5 Q22 5 22 7 L22 16 Q22 18 20 18 L14 18 L9 22 L9 18 L4 18 Q2 18 2 16 L2 7 Q2 5 4 5 Z" fill="rgba(57,212,192,0.12)" />
+        <circle class="msg-dot" cx="8" cy="11.5" r="1.3" fill="currentColor" />
+        <circle class="msg-dot" cx="12" cy="11.5" r="1.3" fill="currentColor" style="animation-delay:.2s" />
+        <circle class="msg-dot" cx="16" cy="11.5" r="1.3" fill="currentColor" style="animation-delay:.4s" />
       </svg>
       <span>Let's build something</span>
     </button>
@@ -39,105 +14,106 @@
 
   <!-- Modal -->
   <Teleport to="body">
-    <div class="msg-modal"
-      :class="{ show: isOpen }"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="msgModalTitle"
-      :aria-hidden="!isOpen"
-      @click.self="close">
-      <div class="msg-modal-card"
-        role="document">
-        <button type="button"
-          class="msg-modal-close"
-          aria-label="close"
-          @click="close">×</button>
-        <div class="msg-modal-head">
-          <span class="msg-modal-spark"></span>
-          <h2 class="msg-modal-title"
-            id="msgModalTitle">let's work together</h2>
+    <div class="msg-modal" :class="{ show: isOpen }" role="dialog" aria-modal="true" aria-labelledby="msgModalTitle" :aria-hidden="!isOpen" @click.self="close">
+      <div class="msg-modal-card" role="document">
+        <button type="button" class="msg-modal-close" aria-label="close" @click="close">×</button>
+
+        <!-- Mode toggle -->
+        <div class="mode-toggle">
+          <button class="mode-btn" :class="{ active: mode === 'client' }" @click="mode = 'client'">🛠 Working together</button>
+          <button class="mode-btn" :class="{ active: mode === 'recruiter' }" @click="mode = 'recruiter'">👤 I'm a recruiter</button>
         </div>
-        <p class="msg-modal-sub">Tell me what you're building — I'll read everything and write back personally.</p>
-        <form class="msg-form"
-          novalidate
-          @submit.prevent="submit">
-          <div class="msg-field">
-            <label for="msgName">Your name <span class="msg-req">*</span></label>
-            <input class="msg-input"
-              :class="{ error: errors.name }"
-              id="msgName"
-              v-model="form.name"
-              type="text"
-              autocomplete="name"
-              maxlength="80"
-              placeholder="Alex Rivera"
-              @input="errors.name = false">
+
+        <!-- CLIENT MODE -->
+        <template v-if="mode === 'client'">
+          <div class="msg-modal-head">
+            <span class="msg-modal-spark"></span>
+            <h2 class="msg-modal-title" id="msgModalTitle">let's work together</h2>
           </div>
-          <div class="msg-field">
-            <label for="msgEmail">Your email <span class="msg-req">*</span></label>
-            <input class="msg-input"
-              :class="{ error: errors.email }"
-              id="msgEmail"
-              v-model="form.email"
-              type="email"
-              autocomplete="email"
-              maxlength="120"
-              placeholder="alex@company.com"
-              @input="errors.email = false">
+          <p class="msg-modal-sub">Tell me what you're building — I'll read everything and write back personally.</p>
+          <form class="msg-form" novalidate @submit.prevent="submitClient">
+            <div class="msg-field">
+              <label for="msgName">Your name <span class="msg-req">*</span></label>
+              <input class="msg-input" :class="{ error: errors.name }" id="msgName" v-model="form.name" type="text" autocomplete="name" maxlength="80" placeholder="Alex Rivera" @input="errors.name = false">
+            </div>
+            <div class="msg-field">
+              <label for="msgEmail">Your email <span class="msg-req">*</span></label>
+              <input class="msg-input" :class="{ error: errors.email }" id="msgEmail" v-model="form.email" type="email" autocomplete="email" maxlength="120" placeholder="alex@company.com" @input="errors.email = false">
+            </div>
+            <div class="msg-field">
+              <label for="msgProject">Project description <span class="msg-req">*</span></label>
+              <textarea class="msg-textarea" :class="{ error: errors.project }" id="msgProject" v-model="form.project" maxlength="2000" placeholder="The problem, the goal, tech/timeline notes." @input="errors.project = false"></textarea>
+            </div>
+            <div class="msg-field">
+              <label for="msgBudget">Budget range <span class="msg-req">*</span></label>
+              <select class="msg-select" :class="{ error: errors.budget }" id="msgBudget" v-model="form.budget" @change="errors.budget = false">
+                <option value="" disabled>pick a ballpark</option>
+                <option v-for="opt in budgetOptions" :key="opt" :value="opt">{{ opt }}</option>
+              </select>
+            </div>
+            <div class="msg-field">
+              <label for="msgTimeline">Timeline <span class="msg-hint">— start / ship?</span></label>
+              <input class="msg-input" id="msgTimeline" v-model="form.timeline" type="text" maxlength="120" placeholder="e.g. kick off next month, ship by Q3">
+            </div>
+            <div class="msg-form-actions">
+              <button type="button" class="msg-cancel" @click="close">Cancel</button>
+              <button type="submit" class="msg-submit">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 L11 13" /><path d="M22 2 L15 22 L11 13 L2 9 Z" /></svg>
+                Send it over
+              </button>
+            </div>
+            <p class="msg-footnote">Opens your mail app, pre-filled. Or email <code>hello@thuso.dev</code> directly.</p>
+          </form>
+        </template>
+
+        <!-- RECRUITER MODE -->
+        <template v-else>
+          <div class="msg-modal-head">
+            <span class="msg-modal-spark recruiter-spark"></span>
+            <h2 class="msg-modal-title recruiter-title" id="msgModalTitle">hire thuso</h2>
           </div>
-          <div class="msg-field">
-            <label for="msgProject">Project description <span class="msg-req">*</span></label>
-            <textarea class="msg-textarea"
-              :class="{ error: errors.project }"
-              id="msgProject"
-              v-model="form.project"
-              maxlength="2000"
-              placeholder="The problem, the goal, tech/timeline notes."
-              @input="errors.project = false"></textarea>
+          <p class="msg-modal-sub">Vue.js · React · TypeScript · WebRTC · 5+ years shipping real products end-to-end. Based in Johannesburg, open to remote.</p>
+
+          <div class="cv-box">
+            <div class="cv-icon">📄</div>
+            <div class="cv-text">
+              <strong>CV available on request</strong>
+              <span>Click below and Thuso will send it over personally.</span>
+            </div>
           </div>
-          <div class="msg-field">
-            <label for="msgBudget">Budget range <span class="msg-req">*</span></label>
-            <select class="msg-select"
-              :class="{ error: errors.budget }"
-              id="msgBudget"
-              v-model="form.budget"
-              @change="errors.budget = false">
-              <option value=""
-                disabled>pick a ballpark</option>
-              <option v-for="opt in budgetOptions"
-                :key="opt"
-                :value="opt">{{ opt }}</option>
-            </select>
-          </div>
-          <div class="msg-field">
-            <label for="msgTimeline">Timeline <span class="msg-hint">— start / ship?</span></label>
-            <input class="msg-input"
-              id="msgTimeline"
-              v-model="form.timeline"
-              type="text"
-              maxlength="120"
-              placeholder="e.g. kick off next month, ship by Q3">
-          </div>
-          <div class="msg-form-actions">
-            <button type="button"
-              class="msg-cancel"
-              @click="close">Cancel</button>
-            <button type="submit"
-              class="msg-submit">
-              <svg viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.2"
-                stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M22 2 L11 13" />
-                <path d="M22 2 L15 22 L11 13 L2 9 Z" />
-              </svg>
-              Send it over
-            </button>
-          </div>
-          <p class="msg-footnote">Opens your mail app, pre-filled. Or email <code>hello@thuso.dev</code> directly.</p>
-        </form>
+
+          <form class="msg-form" novalidate @submit.prevent="submitRecruiter">
+            <div class="msg-field">
+              <label for="rName">Your name <span class="msg-req">*</span></label>
+              <input class="msg-input" :class="{ error: rErrors.name }" id="rName" v-model="rForm.name" type="text" autocomplete="name" maxlength="80" placeholder="Sarah Chen" @input="rErrors.name = false">
+            </div>
+            <div class="msg-field">
+              <label for="rEmail">Your work email <span class="msg-req">*</span></label>
+              <input class="msg-input" :class="{ error: rErrors.email }" id="rEmail" v-model="rForm.email" type="email" autocomplete="email" maxlength="120" placeholder="sarah@company.com" @input="rErrors.email = false">
+            </div>
+            <div class="msg-field">
+              <label for="rCompany">Company <span class="msg-req">*</span></label>
+              <input class="msg-input" :class="{ error: rErrors.company }" id="rCompany" v-model="rForm.company" type="text" maxlength="120" placeholder="e.g. Acme Corp" @input="rErrors.company = false">
+            </div>
+            <div class="msg-field">
+              <label for="rRole">Role you're hiring for <span class="msg-req">*</span></label>
+              <input class="msg-input" :class="{ error: rErrors.role }" id="rRole" v-model="rForm.role" type="text" maxlength="120" placeholder="e.g. Senior Frontend Engineer" @input="rErrors.role = false">
+            </div>
+            <div class="msg-field">
+              <label for="rNote">Anything else? <span class="msg-hint">— optional</span></label>
+              <input class="msg-input" id="rNote" v-model="rForm.note" type="text" maxlength="300" placeholder="Remote, hybrid, salary range, stack…">
+            </div>
+            <div class="msg-form-actions">
+              <button type="button" class="msg-cancel" @click="close">Cancel</button>
+              <button type="submit" class="msg-submit recruiter-submit">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 L11 13" /><path d="M22 2 L15 22 L11 13 L2 9 Z" /></svg>
+                Request CV
+              </button>
+            </div>
+            <p class="msg-footnote">Opens your mail app pre-filled. Thuso will reply with his CV personally.</p>
+          </form>
+        </template>
+
       </div>
     </div>
   </Teleport>
@@ -145,10 +121,17 @@
 
 <script setup lang="ts">
 const isOpen = ref(false)
+const mode = ref<'client' | 'recruiter'>('client')
+
+// Client form
 const form = reactive({ name: '', email: '', project: '', budget: '', timeline: '' })
 const errors = reactive({ name: false, email: false, project: false, budget: false })
-const isZAR = ref(false)
 
+// Recruiter form
+const rForm = reactive({ name: '', email: '', company: '', role: '', note: '' })
+const rErrors = reactive({ name: false, email: false, company: false, role: false })
+
+const isZAR = ref(false)
 onMounted(() => {
   const zarTimezones = new Set(['Africa/Johannesburg', 'Africa/Windhoek'])
   isZAR.value = zarTimezones.has(Intl.DateTimeFormat().resolvedOptions().timeZone)
@@ -181,7 +164,8 @@ function close() {
   isOpen.value = false
   document.body.style.overflow = ''
 }
-function submit() {
+
+function submitClient() {
   errors.name = !form.name.trim()
   errors.email = !form.email.trim()
   errors.project = !form.project.trim()
@@ -193,6 +177,30 @@ function submit() {
     `Name: ${form.name}`, `Email: ${form.email}`, `Budget: ${form.budget}`,
     form.timeline ? `Timeline: ${form.timeline}` : '',
     '', 'Project:', form.project, '', 'Thanks,', form.name
+  ].filter(Boolean).join('\n')
+  window.location.href = `mailto:hello@thuso.dev?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`
+  setTimeout(close, 400)
+}
+
+function submitRecruiter() {
+  rErrors.name = !rForm.name.trim()
+  rErrors.email = !rForm.email.trim()
+  rErrors.company = !rForm.company.trim()
+  rErrors.role = !rForm.role.trim()
+  if (rErrors.name || rErrors.email || rErrors.company || rErrors.role) return
+  const subj = `CV Request — ${rForm.role} at ${rForm.company}`
+  const body = [
+    'Hi Thuso,',
+    '',
+    `I'm ${rForm.name} from ${rForm.company}. We're hiring for a ${rForm.role} role and I'd love to review your CV.`,
+    '',
+    `My email: ${rForm.email}`,
+    rForm.note ? `Notes: ${rForm.note}` : '',
+    '',
+    'Could you send your CV over?',
+    '',
+    `Thanks,`,
+    rForm.name,
   ].filter(Boolean).join('\n')
   window.location.href = `mailto:hello@thuso.dev?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`
   setTimeout(close, 400)
@@ -237,37 +245,19 @@ onMounted(() => {
 }
 
 @keyframes msg-breathe {
-
-  0%,
-  100% {
-    box-shadow: 0 6px 24px rgba(57, 212, 192, .18);
-  }
-
-  50% {
-    box-shadow: 0 10px 30px rgba(63, 185, 80, .28);
-  }
+  0%, 100% { box-shadow: 0 6px 24px rgba(57, 212, 192, .18); }
+  50% { box-shadow: 0 10px 30px rgba(63, 185, 80, .28); }
 }
 
-.cta-message svg {
-  color: var(--c-teal);
-}
+.cta-message svg { color: var(--c-teal); }
 
 :global(.msg-dot) {
   animation: msg-dot-pulse 1.4s ease-in-out infinite;
 }
 
 @keyframes msg-dot-pulse {
-
-  0%,
-  100% {
-    opacity: .9;
-    transform: translateY(0);
-  }
-
-  50% {
-    opacity: .35;
-    transform: translateY(-1px);
-  }
+  0%, 100% { opacity: .9; transform: translateY(0); }
+  50% { opacity: .35; transform: translateY(-1px); }
 }
 
 /* Modal */
@@ -335,6 +325,42 @@ onMounted(() => {
   background: rgba(57, 212, 192, .2);
 }
 
+/* Mode toggle */
+.mode-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  background: rgba(255,255,255,.04);
+  border: 1px dashed rgba(255,255,255,.12);
+  border-radius: 999px;
+  padding: 4px;
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--dim);
+  font-family: 'Caveat', cursive;
+  font-size: .95rem;
+  cursor: pointer;
+  transition: background .25s, color .25s;
+  white-space: nowrap;
+}
+
+.mode-btn.active {
+  background: rgba(57, 212, 192, .2);
+  color: var(--chalk);
+  border: 1px dashed rgba(57, 212, 192, .45);
+}
+
+.mode-btn:not(.active):hover {
+  background: rgba(255,255,255,.06);
+  color: var(--chalk);
+}
+
 .msg-modal-head {
   display: flex;
   align-items: center;
@@ -351,6 +377,11 @@ onMounted(() => {
   animation: msg-breathe 1.6s ease-in-out infinite;
 }
 
+.recruiter-spark {
+  background: var(--c-green);
+  box-shadow: 0 0 12px var(--c-green);
+}
+
 .msg-modal-title {
   font-family: 'Permanent Marker', cursive;
   font-size: 1.4rem;
@@ -361,24 +392,57 @@ onMounted(() => {
   line-height: 1;
 }
 
+.recruiter-title {
+  color: var(--c-green);
+  text-shadow: 0 0 14px rgba(63, 185, 80, .45);
+}
+
 .msg-modal-sub {
   font-family: 'Caveat', cursive;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   color: var(--dim);
   margin: 2px 0 14px;
   line-height: 1.35;
 }
 
+/* CV box */
+.cv-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(63, 185, 80, .08);
+  border: 1px dashed rgba(63, 185, 80, .35);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+
+.cv-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.cv-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: 'Caveat', cursive;
+}
+
+.cv-text strong {
+  font-size: 1.1rem;
+  color: var(--c-green);
+}
+
+.cv-text span {
+  font-size: .95rem;
+  color: var(--dim);
+}
+
 .msg-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-
-.msg-field {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  gap: 12px;
 }
 
 .msg-field label {
@@ -388,9 +452,7 @@ onMounted(() => {
   padding-left: 4px;
 }
 
-.msg-req {
-  color: var(--c-red);
-}
+.msg-req { color: var(--c-red); }
 
 .msg-hint {
   font-size: .82rem;
@@ -413,9 +475,7 @@ onMounted(() => {
   width: 100%;
 }
 
-.msg-select {
-  font-size: .95rem;
-}
+.msg-select { font-size: .95rem; }
 
 .msg-input:focus,
 .msg-textarea:focus,
@@ -483,10 +543,17 @@ onMounted(() => {
   box-shadow: 0 12px 28px rgba(57, 212, 192, .4);
 }
 
-.msg-submit svg {
-  width: 16px;
-  height: 16px;
+.recruiter-submit {
+  border-color: rgba(63, 185, 80, .55);
+  background: linear-gradient(135deg, rgba(63, 185, 80, .3), rgba(57, 212, 192, .2));
+  box-shadow: 0 6px 18px rgba(63, 185, 80, .2);
 }
+
+.recruiter-submit:hover {
+  box-shadow: 0 12px 28px rgba(63, 185, 80, .4);
+}
+
+.msg-submit svg { width: 16px; height: 16px; }
 
 .msg-cancel {
   background: transparent;
@@ -507,7 +574,7 @@ onMounted(() => {
 
 .msg-footnote {
   font-family: 'Caveat', cursive;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   color: var(--dim-2);
   margin-top: 10px;
   text-align: center;
@@ -531,7 +598,6 @@ onMounted(() => {
     padding: 15px 0 25px;
     align-items: center;
   }
-
   .left-ctas .cta {
     font-size: 1rem;
     padding: 11px 18px;
@@ -544,14 +610,16 @@ onMounted(() => {
     width: 100%;
     padding: 18px 16px 14px;
   }
-
   .msg-form-actions {
     flex-direction: column-reverse;
   }
-
   .msg-form-actions button {
     width: 100%;
     justify-content: center;
+  }
+  .mode-toggle {
+    flex-direction: column;
+    border-radius: 12px;
   }
 }
 </style>

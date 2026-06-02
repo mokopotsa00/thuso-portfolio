@@ -195,7 +195,7 @@ onMounted(() => {
 
 .pw-title {
   font-family: 'Permanent Marker', cursive;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   letter-spacing: 1.2px;
   color: var(--c-green);
   text-shadow: 0 0 14px rgba(63, 185, 80, .35);
@@ -212,7 +212,7 @@ onMounted(() => {
 
 .pw-count-pill {
   font-family: 'SF Mono', monospace;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   padding: 3px 8px;
   border-radius: 10px;
@@ -225,7 +225,7 @@ onMounted(() => {
   flex: 1 1 auto;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 8px 10px;
+  padding: 10px 12px;
   scrollbar-width: thin;
   scrollbar-color: #30363d transparent;
 }
@@ -242,7 +242,7 @@ onMounted(() => {
 .pw-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .pw-card {
@@ -250,7 +250,7 @@ onMounted(() => {
   background: linear-gradient(135deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .01));
   border: 1px dashed rgba(255, 255, 255, .12);
   border-radius: 10px;
-  padding: 10px 12px;
+  padding: 12px 14px;
   cursor: pointer;
   transition: transform .3s cubic-bezier(.34, 1.56, .64, 1), border-color .3s, background .3s;
   overflow: hidden;
@@ -294,16 +294,16 @@ onMounted(() => {
 .pw-card-head {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   justify-content: space-between;
 }
 
 .pw-card-title {
   font-family: 'Caveat', cursive;
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 1.28rem;
   color: var(--chalk);
-  line-height: 1.15;
+  line-height: 1.25;
   flex: 1;
   min-width: 0;
   overflow: hidden;
@@ -313,17 +313,17 @@ onMounted(() => {
 
 .pw-card-year {
   font-family: 'SF Mono', monospace;
-  font-size: 10px;
+  font-size: 12px;
   color: var(--dim-2);
   flex-shrink: 0;
 }
 
 .pw-card-desc {
   font-family: 'Caveat', cursive;
-  font-size: 1rem;
+  font-size: 1.12rem;
   color: var(--dim);
-  line-height: 1.3;
-  margin-top: 3px;
+  line-height: 1.4;
+  margin-top: 5px;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -332,16 +332,16 @@ onMounted(() => {
 
 .pw-card-tags {
   display: flex;
-  gap: 5px;
+  gap: 6px;
   flex-wrap: wrap;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
 .pw-tag {
   font-family: 'SF Mono', monospace;
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: .5px;
-  padding: 2px 6px;
+  padding: 3px 8px;
   border-radius: 4px;
   background: rgba(255, 255, 255, .05);
   border: 1px solid rgba(255, 255, 255, .1);
@@ -391,7 +391,7 @@ onMounted(() => {
 
 .pw-detail-body {
   font-family: 'Caveat', cursive;
-  font-size: 1.02rem;
+  font-size: 1.15rem;
   color: var(--chalk);
   line-height: 1.45;
   margin: 8px 0 0;
@@ -412,7 +412,7 @@ onMounted(() => {
   border-radius: 999px;
   font-family: 'Caveat', cursive;
   font-weight: 700;
-  font-size: .98rem;
+  font-size: 1.08rem;
   color: var(--chalk);
   text-decoration: none;
   border: 1px dashed rgba(255, 255, 255, .3);
@@ -472,9 +472,7 @@ onMounted(() => {
   color: var(--chalk);
   font-family: 'Caveat', cursive;
   font-weight: 700;
-  font-size: 1.02rem;
-  cursor: pointer;
-  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1), background .3s, box-shadow .3s;
+  font-size: 1.12rem;
 }
 
 .pw-view-more:hover {
